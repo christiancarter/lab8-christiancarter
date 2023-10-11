@@ -80,7 +80,7 @@ bool findPath(char maze[][MAZE_COL_SIZE], int rowSize, int colSize, int row, int
     //          the other two can be interchanged.
     // Base 1
     // Base 2
-    // Base 3
+    // Base 3/
     
     // STEP 1B: Mark (row, col) as part of the solution path
 
