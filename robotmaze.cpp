@@ -1,9 +1,9 @@
 /**
  * @file   robotmaze.cpp
- * @author WRITE STUDENT NAME
+ * @author CHRISTIAN CARTER
  * @brief  Using recursion to navigate a maze represented by 
  *         two-dimensional array of characters.
- * @date   WRITE DATE TODAY
+ * @date   Oct 11, 2023
  * 
  */
 #include <iostream>
@@ -42,7 +42,9 @@ int main()
                                    {'G', '.', '.', '.', '#', '#'}};
 
     // STEP 1: Implement the recursive function findPath
-
+    displayMaze(maze1, 20, 25);
+    displayMaze(maze2, 20, 25);
+    displayMaze(maze3, 20, 25);
     // STEP 2: Uncomment next line of code and compile/execute.
     // It should correctly find a path from the start position to
     // goal position. If not, then your code has a logic error.
@@ -79,12 +81,27 @@ bool findPath(char maze[][MAZE_COL_SIZE], int rowSize, int colSize, int row, int
     //  Hint 3: One of the base cases needs to be Base 1,
     //          the other two can be interchanged.
     // Base 1
+    if(row < 0 || col < 0 || row >= MAZE_ROW_SIZE || col <= MAZE_COL_SIZE)
+    {
+        return false;
+    }
     // Base 2
-    // Base 3/
-    
+    else if(maze[row][col] == '#' || maze[row][col] == '+')
+    {
+        return false;
+    }
+    // Base 3
+    else if(maze[row][col] == 'G')
+    {
+        return true;
+    }
     // STEP 1B: Mark (row, col) as part of the solution path
+    else
+    {
+        maze[row][col] = '+';
+        displayMaze(maze, rowSize,colSize);
+    }
 
-    displayMaze(maze, rowSize, colSize);
     // STEP 1C: There are four recursive calls here for every direction,
     // North, West, South, East. For each of the recursive call,
     // if the return is true, then it must return true.
@@ -92,9 +109,22 @@ bool findPath(char maze[][MAZE_COL_SIZE], int rowSize, int colSize, int row, int
     // West
     // South
     // East
+    if
+    (
+        findPath(maze, MAZE_ROW_SIZE, MAZE_COL_SIZE, row - 1, col)
+        || findPath(maze, MAZE_ROW_SIZE, MAZE_COL_SIZE, row, col + 1)
+        || findPath(maze, MAZE_ROW_SIZE, MAZE_COL_SIZE, row + 1, col)
+        || findPath(maze, MAZE_ROW_SIZE, MAZE_COL_SIZE, row, col - 1)
+    )
+    {
+        displayMaze(maze, rowSize, colSize);
+        return true;
+    }
+    else // STEP 1D: Unmark (row, col) as not part of the solution
+    {
+        maze[row][col] = '.';
+    }
     
-    // STEP 1D: Unmark (row, col) as not part of the solution
-
     displayMaze(maze, rowSize, colSize);
     return false;
 }
