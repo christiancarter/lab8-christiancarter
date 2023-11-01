@@ -3,7 +3,7 @@
  * @author Christian Carter
  * @brief  Using recursion to navigate a maze represented by 
  *         two-dimensional array of characters.
- * @date   November 1, 2023
+ * @date   Nov 1, 2023
  * 
  */
 #include <iostream>
