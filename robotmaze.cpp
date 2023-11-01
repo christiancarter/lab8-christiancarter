@@ -7,7 +7,6 @@
  * 
  */
 #include <iostream>
-#include <cstdlib>   // system()
 #include <unistd.h>  // usleep()
 
 const int MAZE_ROW_SIZE = 6;
@@ -19,8 +18,6 @@ bool findPath(char maze[][MAZE_COL_SIZE], int rowSize, int colSize, int row, int
 
 int main()
 {
-    const int MAIN_SLEEP = 500000;
-
     // maze 1
     char maze1[][MAZE_COL_SIZE] = {{'S', '#', '#', '#', '#', '#'},
                                    {'.', '.', '.', '.', '.', '#'},
@@ -99,6 +96,14 @@ int main()
     return 0;
 }
 
+/**
+ * @brief iteratively traverse through maze
+ * @param maze maze to traverse through, iteratively, reaching G (goal)
+ * @param rowSize total number of rows for maze
+ * @param colSize total number of columns for maze
+ * @param row current row through which traversing is done
+ * @param col current column through which traversing is done
+*/
 bool findPath(char maze[][MAZE_COL_SIZE], int rowSize, int colSize, int row, int col)
 {
     if (row < 0 || row >= rowSize || col < 0 || col >= colSize)
@@ -134,8 +139,15 @@ bool findPath(char maze[][MAZE_COL_SIZE], int rowSize, int colSize, int row, int
     return false;
 }
 
+/**
+ * @brief maze is played to keep up-to-date view of traversing through it
+ * @param maze maze to traverse through, iteratively, reaching G (goal)
+ * @param rowSize total number of rows for maze
+ * @param colSize total number of columns for maze
+*/
 void displayMaze(char maze[][MAZE_COL_SIZE], int rowSize, int colSize)
 {
+    usleep(200000); // wait for next move within maze
     system("clear");
     for (int row = 0; row < rowSize; ++row)
     {
@@ -145,5 +157,4 @@ void displayMaze(char maze[][MAZE_COL_SIZE], int rowSize, int colSize)
         }
         std::cout << '\n';
     }
-    usleep(200000);
 }
